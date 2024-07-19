@@ -25,6 +25,7 @@
 		<h5 class="m30">설문폼</h5>
 		<hr>
 		
+		<jsp:include page="voteForm.jsp" />
 		<h5 class="m30">설문리스트</h5>
 		<table class="table">
 			<tr>
