@@ -3,8 +3,13 @@
 <%@ page import="ch09.*, java.util.*" %>
 <jsp:useBean id="vDao" class="ch09.VoteDao" />
 <%
-	VoteList vList = vDao.getOneVote(1);
-	ArrayList<String> vItem = vDao.getItem(1);
+	int num = 0;
+	if(!(request.getParameter("num") == null || request.getParameter("num").equals(""))){
+		num = Integer.parseInt(request.getParameter("num"));
+	}
+	
+	VoteList vList = vDao.getOneVote(num);
+	ArrayList<String> vItem = vDao.getItem(num);
 	
 	int type = vList.getType();
 %>
@@ -31,7 +36,7 @@
 	
 	<div class="voteFrom">
 		<h5 class="m50">설문폼</h5>
-		<form action="voteInsertProc.jsp" method="post">
+		<form action="voteFormProc.jsp" method="post">
 			<table class="table">
 				<tr>
 					<td>Q : <%=vList.getQuestion() %></td>
@@ -54,33 +59,14 @@
 				<tr>
 					<td align="center">
 						<input type="submit" value="투 표">&emsp;&emsp;
-						<input type="submit" value="결 과">
+						<input type="button" value="결 과" 
+							   onclick="window.open('voteView.jsp?num=<%=num %>', 'voteView', 'width=500, height=350')">
 					</td>					
 				</tr>
-			</table>			
+			</table>		
+			<input type="hidden" name="num" value="<%=num %>">	
 		</form>
 	</div>
-	
-	<!-- 월요일 삭제 예정 -->
-	<div id="voteListDiv">
-		<h5>설문리스트</h5>
-			<table class="table">
-				<tr align="center">
-					<th>번호</th>
-					<th>제목</th>
-					<th>시작일-종료일</th>
-				</tr>
-				<%
-					for(int i=0; i<=vList.getNum(); i++) {
-						out.print("<td>" + (i+1) + "</td>");
-						/* out.print("<td>" + vList.getQuestion(i) + "</td>"); */
-						out.print("<td>" + vList.getSdate() + "-" + vList.getEdate() + "</td>");
-						out.print("</tr>");
-						if(i<4)
-							out.print("<tr>");
-					}
-				%>
-			</table>		
-	</div>
+
 </body>
 </html>
