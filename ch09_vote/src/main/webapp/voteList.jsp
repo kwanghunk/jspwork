@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:useBean id="vDao" class="ch09.VoteDao" />
-<%@ page import="java.util.*, ch09.*" %>
+<jsp:useBean id="vDao" class="vote.VoteDao" />
+<%@ page import="java.util.*,vote.*" %>
 <!DOCTYPE html>
 <html>
 <head>
